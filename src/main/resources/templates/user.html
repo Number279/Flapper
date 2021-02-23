@@ -23,7 +23,7 @@
 <h5>
     Joined <span th:text="${#dates.format(user.createdAt, 'MMMM dd, yyyy')}"></span>
 </h5>
-<span th:if="${!followingStatus.containsKey(user.userName)}">
+<span th:if="${!isSelfPage}">
 <form th:action="@{/follow/} + ${user.username}" th:if="${!following}" method="post">
     <button style="float:right" type="Submit" class="btn btn-lg btn-success">Follow</button>
 </form>

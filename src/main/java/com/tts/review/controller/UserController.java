@@ -48,19 +48,36 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-    public String getUsers(Model model){
+    public String getUsers(Model model) {
         List<User> users = userService.findAll();
+        User loggedInUser = userService.getLoggedInUser();
+        List<User> usersFollowing = loggedInUser.getFollowing();
+        SetFollowingStatus(users, usersFollowing, model);
         model.addAttribute("users", users);
-        setTweetCount(users, model);
+        SetTweetCounts(users, model);
+
         return "users";
     }
 
-    private void setTweetCount(List<User> users, Model model) {
+    private void SetTweetCounts(List<User> users, Model model) {
         HashMap<String, Integer> tweetCounts = new HashMap<>();
         for(User user : users){
             List<Tweet> tweets = tweetService.findAllByUser(user);
             tweetCounts.put(user.getUsername(), tweets.size());
         }
         model.addAttribute("tweetCount", tweetCounts);
+    }
+
+    private void SetFollowingStatus(List<User> users, List<User> usersFollowing, Model model) {
+        HashMap<String, Boolean> followingStatus = new HashMap<>();
+        String username = userService.getLoggedInUser().getUsername();
+        for (User user : users) {
+            if (usersFollowing.contains(user)) {
+                followingStatus.put(user.getUsername(), true);
+            } else if (!user.getUsername().equals(username)) {
+                followingStatus.put(user.getUsername(),false);
+            }
+        }
+        model.addAttribute("followingStatus", followingStatus);
     }
 }
