@@ -10,6 +10,12 @@ public interface TweetService {
     List<Tweet> findAll();
     List<Tweet> findAllByUser(User user);
     List<Tweet> findAllByUsers(List<User> users);
+    List<Tweet> findAllWithTag(String tag);
+    List<Tweet> formatTweets(List<Tweet> tweets);
     void save(Tweet tweet);
+    void handleTags(Tweet tweet);
+    void addTagLinks(List<Tweet> tweets);
+    void shortenLinks(List<Tweet> tweets);
     Optional<Tweet> findById(Long id);
+
 }
