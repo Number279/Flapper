@@ -48,8 +48,13 @@ public class AuthorizationController {
         return "registration";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET, path = "/login")
-    public String login() {
+//    @RequestMapping(value = "/login", method = RequestMethod.GET, path = "/login")
+//    public String login() {
+//        return "login";
+//    }
+
+    @GetMapping("/login")
+    public String login(){
         return "login";
     }
 }
