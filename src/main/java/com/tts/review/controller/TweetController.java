@@ -61,7 +61,7 @@ public class TweetController {
             tweet.setUser(user);
             tweetService.save(tweet);
             model.addAttribute("successMessage",
-                    "Tweet successfully created!");
+                    "Flap successfully created!");
             model.addAttribute("tweet", new Tweet());
         }
         return "newTweet";
