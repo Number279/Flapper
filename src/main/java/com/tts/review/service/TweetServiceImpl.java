@@ -27,25 +27,25 @@ public class TweetServiceImpl implements TweetService{
     @Override
     public List<Tweet> findAll() {
         List<Tweet> tweets = tweetRepository.findAllByOrderByCreatedAtDesc();
-        return tweets;
+        return formatTweets(tweets);
     }
 
     @Override
     public List<Tweet> findAllByUser(User user) {
         List<Tweet> tweets = tweetRepository.findAllByUserOrderByCreatedAtDesc(user);
-        return tweets;
+        return formatTweets(tweets);
     }
 
     @Override
     public List<Tweet> findAllByUsers(List<User> users) {
         List<Tweet> tweets = tweetRepository.findAllByUserInOrderByCreatedAtDesc(users);
-        return tweets;
+        return formatTweets(tweets);
     }
 
     @Override
     public List<Tweet> findAllWithTag(String tag) {
         List<Tweet> tweets = tweetRepository.findByTags_PhraseOrderByCreatedAtDesc(tag);
-        return tweets;
+        return formatTweets(tweets);
     }
 
     @Override
